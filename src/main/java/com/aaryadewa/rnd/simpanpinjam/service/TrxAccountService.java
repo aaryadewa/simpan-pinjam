@@ -6,6 +6,7 @@ import com.aaryadewa.rnd.simpanpinjam.domain.TrxAccount;
 import com.aaryadewa.rnd.simpanpinjam.repository.postgresql.TrxAccountRepository;
 import com.aaryadewa.rnd.simpanpinjam.service.dto.TrxAccountDTO;
 import com.aaryadewa.rnd.simpanpinjam.service.mapper.TrxAccountMapper;
+import com.querydsl.core.types.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,9 +89,9 @@ public class TrxAccountService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<TrxAccountDTO> findAll(Pageable pageable) {
+    public Page<TrxAccountDTO> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all TrxAccounts");
-        return trxAccountRepository.findAll(pageable).map(trxAccountMapper::toDto);
+        return trxAccountRepository.findAll(predicate, pageable).map(trxAccountMapper::toDto);
     }
 
     /**

@@ -7,6 +7,7 @@ import com.aaryadewa.rnd.simpanpinjam.repository.mongodb.TrxHistoryRepository;
 import com.aaryadewa.rnd.simpanpinjam.service.dto.TrxAccountDTO;
 import com.aaryadewa.rnd.simpanpinjam.service.dto.TrxHistoryDTO;
 import com.aaryadewa.rnd.simpanpinjam.service.mapper.TrxHistoryMapper;
+import com.querydsl.core.types.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,9 +75,9 @@ public class TrxHistoryService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    public Page<TrxHistoryDTO> findAll(Pageable pageable) {
+    public Page<TrxHistoryDTO> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all TrxHistories");
-        return trxHistoryRepository.findAll(pageable).map(trxHistoryMapper::toDto);
+        return trxHistoryRepository.findAll(predicate, pageable).map(trxHistoryMapper::toDto);
     }
 
     /**
@@ -100,6 +101,10 @@ public class TrxHistoryService {
         trxHistoryRepository.deleteById(id);
     }
 
+    /**
+     * Listen for Kafka topic: trx-account.
+     * @param trxAccount
+     */
     @KafkaListener(
         topics = TrxAccountService.KAFKA_TOPIC_NAME,
         groupId = "${kafka.consumer.group.id}"

@@ -8,15 +8,18 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.aaryadewa.rnd.simpanpinjam.domain.TrxAccount;
 import com.aaryadewa.rnd.simpanpinjam.service.TrxAccountService;
 import com.aaryadewa.rnd.simpanpinjam.service.dto.TrxAccountDTO;
 import com.aaryadewa.rnd.simpanpinjam.util.PaginationUtil;
 import com.aaryadewa.rnd.simpanpinjam.util.ResponseUtil;
+import com.querydsl.core.types.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -105,14 +108,17 @@ public class TrxAccountResource {
     /**
      * {@code GET  /trx-accounts} : get all the trxAccounts.
      *
+     * @param predicate the predicate which the requested entities should match.
      * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of trxAccounts in body.
      */
     @GetMapping("/trx-accounts")
-    public ResponseEntity<List<TrxAccountDTO>> getAllTrxAccounts(Pageable pageable) {
-        log.debug("REST request to get TrxAccounts of page: {}", pageable);
-        Page<TrxAccountDTO> page = trxAccountService.findAll(pageable);
+    public ResponseEntity<List<TrxAccountDTO>> getAllTrxAccounts(
+        @QuerydslPredicate(root = TrxAccount.class) Predicate predicate,
+        Pageable pageable
+    ) {
+        log.debug("REST request to get TrxAccounts");
+        Page<TrxAccountDTO> page = trxAccountService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
