@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  simpanpinjam-postgresql:
+    image: postgres:13.5
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=simpanpinjam
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 127.0.0.1:5435:5432
+
+volumes:
+  postgresql-data:
