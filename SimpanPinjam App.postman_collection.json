@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "32b47122-2954-4a50-a59f-ed6ad8f21045",
+		"name": "SimpanPinjam App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/ext-users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ext-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"joko\",\n    \"firstName\": \"Joko\",\n    \"lastName\": \"Widodo\",\n    \"birthDate\": \"1992-03-10\",\n    \"address\": \"Dusun Pisang RT 10 RW 20\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/ext-users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"ext-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Trx Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/trx-accounts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"trx-accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Trx Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 5000000,\n    \"trxDate\": \"2020-08-18T00:00:00.000Z\",\n    \"trxType\": \"SAVINGS\",\n    \"user\": {\n        \"id\": 152\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/trx-accounts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"trx-accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Trx Histories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/trx-accounts?amount=5000000&amount=5000000",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"trx-accounts"
+					],
+					"query": [
+						{
+							"key": "trxDate",
+							"value": "2020-08-17T00:00:00.000Z",
+							"disabled": true
+						},
+						{
+							"key": "trxDate",
+							"value": "2020-09-17T00:00:00.000Z",
+							"disabled": true
+						},
+						{
+							"key": "amount",
+							"value": "1000000",
+							"disabled": true
+						},
+						{
+							"key": "amount",
+							"value": "2000000",
+							"disabled": true
+						},
+						{
+							"key": "amount",
+							"value": "5000000"
+						},
+						{
+							"key": "amount",
+							"value": "5000000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
