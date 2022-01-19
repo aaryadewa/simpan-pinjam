@@ -41,7 +41,7 @@ docker-compose -f src/main/docker/mongodb.yml up -d
 Script docker-compose untuk Kafka juga tersedia di ```src/main/docker/kafka.yml```. Ketik perintah berikut pada ```command prompt``` untuk menjalankan service Kafka pada container:
 
 ```
-docker-compose -f src/main/docker/mongodb.yml up -d
+docker-compose -f src/main/docker/kafka.yml up -d
 ```
 
 ### Menjalankan Aplikasi Back-end
